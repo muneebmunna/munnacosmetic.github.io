@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munna Cosmetics - Premium Skincare</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #fafafa;
+            color: #333;
+            line-height: 1.6;
+        }
+        h1, h2, h3 { font-family: 'Playfair Display', serif; }
+
+        /* Top Bar */
+        .topbar {
+            background: #000;
+            color: #fff;
+            padding: 10px 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+        .topbar a { color: #00ff00; text-decoration: none; font-weight: 600; }
+
+        /* Header */
+        header {
+            background: #fff;
+            padding: 15px 20px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 1000;
+        }
+        .nav {
+            display: flex; justify-content: space-between; align-items: center; max-width: 1400px; margin: 0 auto;
+        }
+        .logo { font-size: 28px; font-weight: 700; color: #d4a373; }
+        .menu a { margin: 0 15px; text-decoration: none; color: #333; font-weight: 500; }
+        .icons i { margin-left: 20px; font-size: 20px; cursor: pointer; }
+
+        /* Hero */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1596461404969-9ae7e9bde73c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+            background-size: cover; background-position: center;
+            height: 90vh; display: flex; align-items: center; color: #fff; text-align: left;
+            padding: 0 50px;
+        }
+        .hero-content h1 { font-size: 58px; margin-bottom: 20px; }
+        .hero-content p { font-size: 20px; margin-bottom: 30px; max-width: 600px; }
+        .btn { padding: 14px 30px; background: #d4a373; color: #fff; border: none; border-radius: 50px; cursor: pointer; font-size: 16px; }
+        .btn-outline { background: transparent; border: 2px solid #fff; margin-left: 15px; }
+
+        /* Products */
+        .section { padding: 80px 20px; max-width: 1400px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 40px; margin-bottom: 60px; }
+        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .product-card {
+            background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: 0.3s; text-align: center; position: relative;
+        }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-img { width: 100%; height: 280px; object-fit: cover; }
+        .sold-badge { position: absolute; top: 10px; left: 10px; background: #ff6b6b; color: #fff; padding: 5px 10px; border-radius: 20px; font-size: 12px; }
+        .discount { position: absolute; top: 10px; right: 10px; background: #51cf66; color: #fff; padding: 5px 10px; border-radius: 20px; font-size: 12px; }
+        .product-info { padding: 20px; }
+        .stars { color: #ffd700; margin: 10px 0; }
+        .price { font-size: 24px; font-weight: 600; color: #d4a373; }
+        .old-price { text-decoration: line-through; color: #999; margin-left: 10px; font-size: 16px; }
+        .actions { margin-top: 15px; display: flex; justify-content: center; gap: 10px; }
+        .actions i { font-size: 20px; cursor: pointer; }
+
+        /* WhatsApp Float */
+        .whatsapp-float {
+            position: fixed; bottom: 25px; right: 25px; background: #25d366; color: #fff;
+            width: 65px; height: 65px; border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 35px; box-shadow: 0 5px 20px rgba(37,211,102,0.4);
+            z-index: 999; animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(37,211,102,0.7); } 70% { box-shadow: 0 0 0 20px rgba(37,211,102,0); } 100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); } }
+
+        /* Modal */
+        .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-content { background: #fff; padding: 40px; border-radius: 20px; width: 90%; max-width: 500px; }
+        .close { float: right; font-size: 30px; cursor: pointer; }
+
+        /* Admin Panel */
+        #adminPanel { display: none; background: #f1f1f1; padding: 40px; margin: 40px auto; max-width: 1000px; border-radius: 20px; }
+        .form-group { margin: 15px 0; }
+        input, textarea, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="topbar">
+        Call/WhatsApp: <a href="tel:+923100378050">+92 310 0378050</a> | Email: ali635525611@gmail.com | Free Delivery All Over Pakistan
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="nav">
+            <div class="logo">Munna Cosmetics</div>
+            <div class="menu">
+                <a href="#">Sale</a>
+                <a href="#">Collection</a>
+                <a href="#">Shop</a>
+                <a href="#">Contact</a>
+            </div>
+            <div class="icons">
+                <i class="far fa-user" onclick="openModal('loginModal')"></i>
+                <i class="far fa-heart"></i>
+                <i class="fas fa-shopping-cart"></i>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Power Of Healthy Skin</h1>
+            <p>Your Path to Flawless Skin Starts Here. Harness the Power of Nature for Beautiful Skin.</p>
+            <button class="btn">Shop Now</button>
+            <button class="btn btn-outline">Explore Our Products</button>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <div class="section">
+        <h2 class="section-title">Explore Our Skin Care Product</h2>
+        <div class="product-grid" id="productContainer">
+            <!-- Products will be loaded here by JavaScript -->
+        </div>
+    </div>
+
+    <!-- WhatsApp Float -->
+    <a href="https://wa.me/923100378050" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('loginModal')">&times;</span>
+            <h2>Admin Login</h2>
+            <input type="text" id="username" placeholder="Username">
+            <input type="password" id="password" placeholder="Password">
+            <button class="btn" onclick="adminLogin()">Login</button>
+        </div>
+    </div>
+
+    <!-- Admin Panel -->
+    <div id="adminPanel">
+        <h2>Admin Control Panel</h2>
+        <button onclick="logout()" style="float:right; background:#ff6b6b;">Logout</button>
+        <h3>Add New Product</h3>
+        <div class="form-group"><input type="text" id="pName" placeholder="Product Name"></div>
+        <div class="form-group"><input type="text" id="pPrice" placeholder="Price (₨)"></div>
+        <div class="form-group"><input type="text" id="pOldPrice" placeholder="Old Price (optional)"></div>
+        <div class="form-group"><input type="text" id="pDiscount" placeholder="Discount % (optional)"></div>
+        <div class="form-group"><input type="text" id="pSold" placeholder="Sold Count"></div>
+        <div class="form-group"><input type="text" id="pImage" placeholder="Image URL"></div>
+        <div class="form-group"><textarea id="pReview" placeholder="Short Review"></textarea></div>
+        <button class="btn" onclick="addProduct()">Add Product</button>
+        <button class="btn" onclick="clearProducts()" style="background:#ff6b6b; margin-left:10px;">Clear All Products</button>
+
+        <h3 style="margin-top:40px;">Change Password</h3>
+        <input type="password" id="oldPass" placeholder="Old Password">
+        <input type="password" id="newPass" placeholder="New Password">
+        <button class="btn" onclick="changePassword()">Change Password</button>
+    </div>
+
+    <script>
+        let products = JSON.parse(localStorage.getItem('munnaProducts')) || [
+            {name:"Simple Facial Wash", price:4200, oldPrice:5200, discount:"20%", sold:128, image:"https://images.unsplash.com/photo-1559583985-c80d8ad9b98f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", review:"Best cleanser ever!"},
+            {name:"Honey and Lemon Cream", price:3000, oldPrice:"", discount:"", sold:89, image:"https://images.unsplash.com/photo-1625772292130-c6af89dfa979?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", review:"Natural glow!"},
+            {name:"Caldaie Cream", price:2200, oldPrice:"", discount:"", sold:156, image:"https://images.unsplash.com/photo-1625772292130-c6af89dfa979?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", review:"Super hydrating"},
+            {name:"Strum Face Wash", price:4300, oldPrice:"", discount:"", sold:92, image:"https://images.unsplash.com/photo-1591376930389-6e2c3d30b3c3?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80", review:"Gentle on skin"}
+        ];
+
+        let adminPass = localStorage.getItem('munnaAdminPass') || "12345";
+
+        function loadProducts() {
+            const container = document.getElementById('productContainer');
+            container.innerHTML = '';
+            products.forEach((p, i) => {
+                container.innerHTML += `
+                <div class="product-card">
+                    ${p.discount ? `<span class="discount">${p.discount} OFF</span>` : ''}
+                    <span class="sold-badge">Sold ${p.sold}</span>
+                    <img src="${p.image}" class="product-img">
+                    <div class="product-info">
+                        <h3>${p.name}</h3>
+                        <div class="stars">★★★★★</div>
+                        <p style="font-size:13px; color:#666;">${p.review}</p>
+                        <div class="price">₨${p.price} ${p.oldPrice ? `<span class="old-price">₨${p.oldPrice}</span>` : ''}</div>
+                        <div class="actions">
+                            <i class="far fa-heart" onclick="alert('Added to favourites')"></i>
+                            <i class="fas fa-cart-plus" onclick="alert('Added to cart')"></i>
+                            <a href="https://wa.me/923100378050?text=Hello!%20I%20want%20to%20buy%20${encodeURIComponent(p.name)}%20-%20₨${p.price}" target="_blank">
+                                <i class="fab fa-whatsapp" style="color:#25d366;"></i>
+                            </a>
+                            <i class="fas fa-trash" onclick="deleteProduct(${i})" style="color:red; display:none;" id="del${i}"></i>
+                        </div>
+                    </div>
+                </div>`;
+            });
+            if (document.getElementById('adminPanel').style.display === 'block') {
+                products.forEach((_, i) => document.getElementById('del'+i).style.display = 'inline');
+            }
+        }
+
+        function addProduct() {
+            const p = {
+                name: document.getElementById('pName').value,
+                price: document.getElementById('pPrice').value,
+                oldPrice: document.getElementById('pOldPrice').value,
+                discount: document.getElementById('pDiscount').value,
+                sold: document.getElementById('pSold').value,
+                image: document.getElementById('pImage').value,
+                review: document.getElementById('pReview').value
+            };
+            products.push(p);
+            localStorage.setItem('munnaProducts', JSON.stringify(products));
+            loadProducts();
+            alert('Product Added!');
+        }
+
+        function deleteProduct(i) {
+            if(confirm('Delete this product?')) {
+                products.splice(i,1);
+                localStorage.setItem('munnaProducts', JSON.stringify(products));
+                loadProducts();
+            }
+        }
+
+        function clearProducts() {
+            if(confirm('Delete ALL products?')) {
+                products = [];
+                localStorage.setItem('munnaProducts', JSON.stringify(products));
+                loadProducts();
+            }
+        }
+
+        function adminLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+            if (user === 'admin' && pass === adminPass) {
+                closeModal('loginModal');
+                document.getElementById('adminPanel').style.display = 'block';
+                loadProducts();
+            } else {
+                alert('Wrong credentials!');
+            }
+        }
+
+        function logout() {
+            document.getElementById('adminPanel').style.display = 'none';
+            loadProducts();
+        }
+
+        function changePassword() {
+            const old = document.getElementById('oldPass').value;
+            const newp = document.getElementById('newPass').value;
+            if (old === adminPass) {
+                adminPass = newp;
+                localStorage.setItem('munnaAdminPass', newp);
+                alert('Password changed!');
+            } else {
+                alert('Old password wrong!');
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+        window.onclick = e => { if(e.target.classList.contains('modal')) e.target.style.display = 'none'; }
+
+        loadProducts();
+    </script>
+</body>
+</html>
